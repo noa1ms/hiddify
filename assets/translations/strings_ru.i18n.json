@@ -67,6 +67,13 @@
             "failureMsg": "Ошибка обновления",
             "successMsg": "Профиль успешно обновлён"
         },
+        "share": {
+            "buttonText": "Поделиться",
+            "exportToClipboardSuccess": "Ссылка скопирована в буфер обмена",
+            "exportSubLinkToClipboard": "Копировать ссылку на подписку в буфер обмена",
+            "exportConfigToClipboard": "Копировать конфигурацию в буфер обмена",
+            "exportConfigToClipboardSuccess": "Конфигурация скопирована в буфер обмена"
+        },
         "edit": {
             "buttonTxt": "Изменить",
             "selectActiveTxt": "Выберите активный профиль"
@@ -164,10 +171,10 @@
             "clearSelection": "Очистить выбор"
         },
         "config": {
-            "mode": "Режим",
-            "modes": {
-                "none": "Нет",
+            "serviceMode": "Режим сервиса",
+            "serviceModes": {
                 "proxy": "Прокси",
+                "systemProxy": "Системный прокси",
                 "tun": "VPN"
             },
             "section": {
@@ -199,7 +206,10 @@
             "enableClashApi": "Использовать Clash API",
             "clashApiPort": "Порт Clash API",
             "enableTun": "Использовать TUN",
-            "setSystemProxy": "Установить системный прокси"
+            "setSystemProxy": "Использовать системный прокси",
+            "enableFakeDns": "Использовать поддельную DNS",
+            "bypassLan": "Обход локальной сети",
+            "strictRoute": "Строгая маршрутизация"
         }
     },
     "about": {
@@ -212,7 +222,7 @@
         "termsAndConditions": "Условия и положения"
     },
     "appUpdate": {
-        "notAvailableMsg": "У вас установлена последняя версия",
+        "notAvailableMsg": "Установлена последняя версия",
         "dialogTitle": "Доступно обновление",
         "updateMsg": "Доступна новая версия @:general.appTitle. Обновить сейчас?",
         "currentVersionLbl": "Текущая версия",
@@ -243,7 +253,9 @@
             "invalidConfigOptions": "Неправильные параметры конфигурации",
             "invalidConfig": "Неправильная конфигурация",
             "create": "Ошибка создания сервиса",
-            "start": "Ошибка запуска сервиса"
+            "start": "Ошибка запуска сервиса",
+            "missingPrivilege": "Отсутствующие привилегии",
+            "missingPrivilegeMsg": "Режим VPN требует прав администратора. Либо перезапустите приложение от имени администратора, либо измените сервисный режим."
         },
         "connectivity": {
             "unexpected": "Неожиданная ошибка",

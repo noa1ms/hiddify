@@ -10,6 +10,7 @@ import 'package:hiddify/domain/core_facade.dart';
 import 'package:hiddify/domain/core_service_failure.dart';
 import 'package:hiddify/domain/singbox/singbox.dart';
 import 'package:hiddify/services/files_editor_service.dart';
+import 'package:hiddify/services/platform_services.dart';
 import 'package:hiddify/services/singbox/singbox_service.dart';
 import 'package:hiddify/utils/utils.dart';
 
@@ -17,6 +18,7 @@ class CoreFacadeImpl with ExceptionHandler, InfraLogger implements CoreFacade {
   CoreFacadeImpl(
     this.singbox,
     this.filesEditor,
+    this.platformServices,
     this.clash,
     this.debug,
     this.configOptions,
@@ -24,6 +26,7 @@ class CoreFacadeImpl with ExceptionHandler, InfraLogger implements CoreFacade {
 
   final SingboxService singbox;
   final FilesEditorService filesEditor;
+  final PlatformServices platformServices;
   final ClashApi clash;
   final bool debug;
   final ConfigOptions Function() configOptions;
@@ -88,17 +91,46 @@ class CoreFacadeImpl with ExceptionHandler, InfraLogger implements CoreFacade {
   }
 
   @override
-  TaskEither<CoreServiceFailure, Unit> start(
+  TaskEither<CoreServiceFailure, String> generateConfig(
     String fileName,
-    bool disableMemoryLimit,
   ) {
     return exceptionHandler(
       () {
         final configPath = filesEditor.configPath(fileName);
         final options = configOptions();
+        return setup()
+            .andThen(() => changeConfigOptions(options))
+            .andThen(
+              () => singbox
+                  .generateConfig(configPath)
+                  .mapLeft(CoreServiceFailure.other),
+            )
+            .run();
+      },
+      CoreServiceFailure.unexpected,
+    );
+  }
+
+  @override
+  TaskEither<CoreServiceFailure, Unit> start(
+    String fileName,
+    bool disableMemoryLimit,
+  ) {
+    return exceptionHandler(
+      () async {
+        final configPath = filesEditor.configPath(fileName);
+        final options = configOptions();
         loggy.info(
           "config options: ${options.format()}\nMemory Limit: ${!disableMemoryLimit}",
         );
+
+        if (options.enableTun) {
+          final hasPrivilege = await platformServices.hasPrivilege();
+          if (!hasPrivilege) {
+            loggy.warning("missing privileges for tun mode");
+            return left(const CoreMissingPrivilege());
+          }
+        }
 
         return setup()
             .andThen(() => changeConfigOptions(options))

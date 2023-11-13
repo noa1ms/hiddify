@@ -67,6 +67,13 @@
             "failureMsg": "Failed to update profile",
             "successMsg": "Profile updated successfully"
         },
+        "share": {
+            "buttonText": "Share",
+            "exportToClipboardSuccess": "Exported to clipboard",
+            "exportSubLinkToClipboard": "Export subscription link to clipboard",
+            "exportConfigToClipboard": "Export configuration to clipboard",
+            "exportConfigToClipboardSuccess": "Configuration copied to clipboard"
+        },
         "edit": {
             "buttonTxt": "Edit",
             "selectActiveTxt": "Select active profile"
@@ -164,10 +171,10 @@
             "clearSelection": "Clear selection"
         },
         "config": {
-            "mode": "Mode",
-            "modes": {
-                "none": "None",
+            "serviceMode": "Service Mode",
+            "serviceModes": {
                 "proxy": "Proxy",
+                "systemProxy": "System Proxy",
                 "tun": "VPN"
             },
             "section": {
@@ -199,7 +206,10 @@
             "enableClashApi": "Enable Clash API",
             "clashApiPort": "Clash API Port",
             "enableTun": "Enable TUN",
-            "setSystemProxy": "Set System Proxy"
+            "setSystemProxy": "Set System Proxy",
+            "enableFakeDns": "Enable Fake DNS",
+            "bypassLan": "Bypass Lan",
+            "strictRoute": "Strict Route"
         }
     },
     "about": {
@@ -240,6 +250,8 @@
         "singbox": {
             "unexpected": "Unexpected Service Error",
             "serviceNotRunning": "Service is not running",
+            "missingPrivilege": "Missing Privilege",
+            "missingPrivilegeMsg": "VPN mode requires administrator privileges. Either relaunch the app as administrator or change service mode.",
             "invalidConfigOptions": "Invalid configuration options",
             "invalidConfig": "Invalid Configuration",
             "create": "Service creation error",

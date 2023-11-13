@@ -67,6 +67,13 @@
             "failureMsg": "در بروزرسانی پروفایل خطایی رخ داد",
             "successMsg": "پروفایل با موفقیت بروزرسانی شد"
         },
+        "share": {
+            "buttonText": "اشتراک گذاری",
+            "exportToClipboardSuccess": "به کلیپ بورد اضافه شد",
+            "exportSubLinkToClipboard": "افزودن لینک اشتراک به کلیپ بورد",
+            "exportConfigToClipboard": "افزودن پیکربندی به کلیپ بورد",
+            "exportConfigToClipboardSuccess": "پیکربندی در کلیپ بورد کپی شد"
+        },
         "edit": {
             "buttonTxt": "ویرایش",
             "selectActiveTxt": "انتخاب پروفایل فعال"
@@ -164,10 +171,10 @@
             "clearSelection": "حذف انتخاب‌ها"
         },
         "config": {
-            "mode": "حالت",
-            "modes": {
-                "none": "هیچ یک",
+            "serviceMode": "حالت سرویس",
+            "serviceModes": {
                 "proxy": "پروکسی",
+                "systemProxy": "پروکسی سیستم",
                 "tun": "VPN"
             },
             "section": {
@@ -199,7 +206,10 @@
             "enableClashApi": "فعالسازی کلش",
             "clashApiPort": "پورت کلش",
             "enableTun": "فعال سازی تونل",
-            "setSystemProxy": "تنظیم پروکسی سیستم"
+            "setSystemProxy": "تنظیم پروکسی سیستم",
+            "enableFakeDns": "Enable Fake DNS",
+            "bypassLan": "Bypass Lan",
+            "strictRoute": "Strict Route"
         }
     },
     "about": {
@@ -240,6 +250,8 @@
         "singbox": {
             "unexpected": "خطای غیرمنتظره در سرویس",
             "serviceNotRunning": "سرویس در حال اجرا نیست",
+            "missingPrivilege": "نیازمند دسترسی",
+            "missingPrivilegeMsg": "حالت VPN به دسترسی administrator نیاز دارد. یا برنامه را به عنوان سرپرست راه اندازی مجدد کنید یا حالت سرویس را تغییر دهید.",
             "invalidConfigOptions": "تنظیمات کانفیگ نامعتبر",
             "invalidConfig": "کانفیگ غیر معتبر",
             "create": "در ایجاد سرویس خطایی رخ داده",

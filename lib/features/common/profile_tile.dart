@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hiddify/core/core_providers.dart';
@@ -254,6 +255,14 @@ class ProfileActionsMenu extends HookConsumerWidget {
       initialOnSuccess: () =>
           CustomToast.success(t.profile.update.successMsg).show(context),
     );
+    final exportConfigMutation = useMutation(
+      initialOnFailure: (err) {
+        CustomToast.error(t.presentShortError(err)).show(context);
+      },
+      initialOnSuccess: () =>
+          CustomToast.success(t.profile.share.exportConfigToClipboardSuccess)
+              .show(context),
+    );
     final deleteProfileMutation = useMutation(
       initialOnFailure: (err) {
         CustomAlertDialog.fromErr(t.presentError(err)).show(context);
@@ -278,6 +287,39 @@ class ProfileActionsMenu extends HookConsumerWidget {
               );
             },
           ),
+        SubmenuButton(
+          menuChildren: [
+            if (profile case RemoteProfile(:final url, :final name))
+              MenuItemButton(
+                child: Text(t.profile.share.exportSubLinkToClipboard),
+                onPressed: () async {
+                  final link = LinkParser.generateSubShareLink(url, name);
+                  if (link.isNotEmpty) {
+                    await Clipboard.setData(ClipboardData(text: link));
+                    if (context.mounted) {
+                      CustomToast(t.profile.share.exportToClipboardSuccess)
+                          .show(context);
+                    }
+                  }
+                },
+              ),
+            MenuItemButton(
+              child: Text(t.profile.share.exportConfigToClipboard),
+              onPressed: () async {
+                if (exportConfigMutation.state.isInProgress) {
+                  return;
+                }
+                exportConfigMutation.setFuture(
+                  ref
+                      .read(profilesNotifierProvider.notifier)
+                      .exportConfigToClipboard(profile),
+                );
+              },
+            ),
+          ],
+          leadingIcon: const Icon(Icons.share),
+          child: Text(t.profile.share.buttonText),
+        ),
         MenuItemButton(
           leadingIcon: const Icon(Icons.edit),
           child: Text(t.profile.edit.buttonTxt),

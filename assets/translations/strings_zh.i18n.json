@@ -67,6 +67,13 @@
             "failureMsg": "更新配置文件失败",
             "successMsg": "配置文件更新成功"
         },
+        "share": {
+            "buttonText": "分享",
+            "exportToClipboardSuccess": "导出到剪贴板",
+            "exportSubLinkToClipboard": "将订阅链接导出到剪贴板",
+            "exportConfigToClipboard": "将配置导出到剪贴板",
+            "exportConfigToClipboardSuccess": "配置已复制到剪贴板"
+        },
         "edit": {
             "buttonTxt": "编辑",
             "selectActiveTxt": "选择活动配置文件"
@@ -164,10 +171,10 @@
             "clearSelection": "清空选项"
         },
         "config": {
-            "mode": "模式",
-            "modes": {
-                "none": "无",
-                "proxy": "代理",
+            "serviceMode": "服务方式",
+            "serviceModes": {
+                "proxy": "代理人",
+                "systemProxy": "系统代理",
                 "tun": "VPN"
             },
             "section": {
@@ -199,7 +206,10 @@
             "enableClashApi": "启用 Clash API",
             "clashApiPort": "Clash API 端口",
             "enableTun": "启用 TUN",
-            "setSystemProxy": "设置系统代理"
+            "setSystemProxy": "设置系统代理",
+            "enableFakeDns": "Enable Fake DNS",
+            "bypassLan": "Bypass Lan",
+            "strictRoute": "Strict Route"
         }
     },
     "about": {
@@ -243,7 +253,9 @@
             "invalidConfigOptions": "配置选项无效",
             "invalidConfig": "无效配置",
             "create": "服务创建错误",
-            "start": "服务启动错误"
+            "start": "服务启动错误",
+            "missingPrivilege": "缺少特权",
+            "missingPrivilegeMsg": "VPN 模式需要管理员权限。以管理员身份重新启动应用程序或更改服务模式"
         },
         "connectivity": {
             "unexpected": "意外失败",

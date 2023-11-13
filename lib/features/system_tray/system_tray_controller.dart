@@ -30,8 +30,11 @@ class SystemTrayController extends _$SystemTrayController
       _initialized = true;
     }
 
-    final connection = await ref.watch(connectivityControllerProvider.future);
-    final mode = ref.watch(coreModeStoreProvider);
+    final connection = switch (ref.watch(connectivityControllerProvider)) {
+      AsyncData(:final value) => value,
+      _ => const Disconnected(),
+    };
+    final serviceMode = ref.watch(serviceModeStoreProvider);
 
     final t = ref.watch(translationsProvider);
 
@@ -56,19 +59,19 @@ class SystemTrayController extends _$SystemTrayController
           onClick: handleClickSetAsSystemProxy,
         ),
         MenuItem.submenu(
-          label: t.settings.config.mode,
+          label: t.settings.config.serviceMode,
           submenu: Menu(
             items: [
-              ...CoreMode.values.map(
+              ...ServiceMode.values.map(
                 (e) => MenuItem.checkbox(
-                  checked: e == mode,
+                  checked: e == serviceMode,
                   key: e.name,
                   label: e.present(t),
                   onClick: (menuItem) async {
-                    final newMode = CoreMode.values.byName(menuItem.key!);
-                    loggy.debug("switching core mode: [$newMode]");
+                    final newMode = ServiceMode.values.byName(menuItem.key!);
+                    loggy.debug("switching service mode: [$newMode]");
                     await ref
-                        .read(coreModeStoreProvider.notifier)
+                        .read(serviceModeStoreProvider.notifier)
                         .update(newMode);
                   },
                 ),
